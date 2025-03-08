@@ -54,7 +54,7 @@ bool is_adjacent(const string& word1, const string& word2) {
 vector<string> generate_word_ladder(const string& begin_word, const string& end_word, const set<string>& word_list) {
     if (begin_word == end_word) {
         error(begin_word, end_word, "The begin word and end word cannot be the same!");
-        return {begin_word};
+        return {};
     }
 
     queue<vector<string>> ladder_queue;
@@ -66,16 +66,14 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
         ladder_queue.pop();
         string last_word = ladder[ladder.size()-1];
         for(auto word : word_list) {
-            if (is_adjacent(last_word, word)) {
-                if (visited.find(word) == visited.end()) {
-                    visited.insert(word);
-                    vector<string> new_ladder = ladder;
-                    new_ladder.push_back(word);
-                    if (word == end_word) {
-                        return new_ladder;
-                    }
-                    ladder_queue.push(new_ladder);
+            if (is_adjacent(last_word, word) && visited.find(word) == visited.end()) {
+                visited.insert(word);
+                vector<string> new_ladder = ladder;
+                new_ladder.push_back(word);
+                if (word == end_word) {
+                    return new_ladder;
                 }
+                ladder_queue.push(new_ladder);
             }
         }
     }
@@ -99,10 +97,16 @@ void load_words(set<string> & word_list, const string& file_name) {
 
 
 void print_word_ladder(const vector<string>& ladder) {
-    for (auto word : ladder) {
-        cout << word << " ";
+    if (ladder.empty()) {
+        cout << "No word ladder found." << endl;
     }
-    cout << endl;
+    else {
+        cout << "Word ladder found: " << endl;
+        for (auto word : ladder) {
+            cout << word << " ";
+        }
+        cout << endl;
+    }
 }
 
 
