@@ -9,7 +9,11 @@ void error(string word1, string word2, string msg) {
 bool edit_distance_within(const std::string& str1, const std::string& str2, int d) {
     int length1 = str1.size() + 1;
     int length2 = str2.size() + 1;
-    int MED[length1][length2];
+
+    int** MED = new int*[length1];
+    for (int i = 0; i < length1; i++) {
+        MED[i] = new int[length2];
+    }
 
     for (int i = 0; i < length1; ++i) {
         MED[i][0] = i;
@@ -28,7 +32,14 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
         }
     }
 
-    return MED[str1.size()][str2.size()] <= d;
+    bool verdict = MED[str1.size()][str2.size()] <= d;
+
+    for (int i = 0; i < length1; i++) {
+        delete[] MED[i];
+    }
+    delete[] MED;
+
+    return verdict;
 }
 
 
