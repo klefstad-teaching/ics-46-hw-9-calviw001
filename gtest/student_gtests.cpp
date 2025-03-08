@@ -17,6 +17,14 @@ namespace {
   }
 
 
+  TEST(Ladder, Is_Adjacent) {
+    EXPECT_TRUE(is_adjacent("word", "word"));
+    EXPECT_TRUE(is_adjacent("zoom", "zoo"));
+    EXPECT_TRUE(is_adjacent("cat", "chat"));
+    EXPECT_TRUE(is_adjacent("what", "hat"));
+  }
+
+
   int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
