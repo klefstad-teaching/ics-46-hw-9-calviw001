@@ -52,8 +52,34 @@ bool is_adjacent(const string& word1, const string& word2) {
 
 
 vector<string> generate_word_ladder(const string& begin_word, const string& end_word, const set<string>& word_list) {
-    vector<string> result;
-    return result;
+    if (begin_word == end_word) {
+        error(begin_word, end_word, "The begin word and end word cannot be the same!");
+        return {begin_word};
+    }
+
+    queue<vector<string>> ladder_queue;
+    ladder_queue.push({begin_word});
+    set<string> visited;
+    visited.insert(begin_word);
+    while (!ladder_queue.empty()) {
+        vector<string> ladder = ladder_queue.front();
+        ladder_queue.pop();
+        string last_word = ladder[ladder.size()-1];
+        for(auto word : word_list) {
+            if (is_adjacent(last_word, word)) {
+                if (visited.find(word) == visited.end()) {
+                    visited.insert(word);
+                    vector<string> new_ladder = ladder;
+                    new_ladder.push_back(word);
+                    if (word == end_word) {
+                        return new_ladder;
+                    }
+                    ladder_queue.push(new_ladder);
+                }
+            }
+        }
+    }
+    return {};
 }
 
 
