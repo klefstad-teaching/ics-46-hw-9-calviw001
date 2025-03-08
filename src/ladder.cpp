@@ -23,7 +23,17 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
 
 
 void load_words(set<string> & word_list, const string& file_name) {
-
+    ifstream inFile;  
+    inFile.open(file_name);
+    if (!(inFile.is_open())) {
+        error("", "", "Cannot open file!");
+        return;
+    }
+    string word;
+    while (getline(inFile, word)) {
+        word_list.insert(word);
+    }
+    inFile.close();
 }
 
 
