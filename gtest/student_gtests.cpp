@@ -55,7 +55,7 @@ namespace {
     int dest = 2; 
     vector<int> previous;
     vector<int> distances = dijkstra_shortest_path(G, source, previous);
-    vector<int> path = extract_shortest_path(previous, dest);
+    vector<int> path = extract_shortest_path(distances, previous, dest);
 
     vector<int> expected_path;
     expected_path.push_back(0);
