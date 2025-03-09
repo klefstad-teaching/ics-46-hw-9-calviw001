@@ -31,8 +31,6 @@ namespace {
     file_to_graph(filename, G);
 
     int source = 0; 
-    int dest = 3; 
-
     vector<int> previous;
     vector<int> distances = dijkstra_shortest_path(G, source, previous);
 
@@ -44,6 +42,29 @@ namespace {
 
     for (size_t i = 0; i < distances.size(); ++i) {
         EXPECT_TRUE(distances[i] == expected_distances[i]);
+    }
+  }
+
+
+  TEST(Dijkstra, Extract_Shortest_Path) {
+    Graph G;
+    string filename = "src/small.txt";
+    file_to_graph(filename, G);
+
+    int source = 0; 
+    int dest = 2; 
+    vector<int> previous;
+    vector<int> distances = dijkstra_shortest_path(G, source, previous);
+    vector<int> path = extract_shortest_path(previous, dest);
+
+    vector<int> expected_path;
+    expected_path.push_back(0);
+    expected_path.push_back(3); 
+    expected_path.push_back(1);
+    expected_path.push_back(2); 
+
+    for (size_t i = 0; i < path.size(); ++i) {
+        EXPECT_TRUE(path[i] == expected_path[i]);
     }
   }
 
