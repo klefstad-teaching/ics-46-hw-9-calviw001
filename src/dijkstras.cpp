@@ -10,9 +10,12 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
     // Set all vertices to unexplored
     previous.assign(numVertices, -1); 
 
-    priority_queue<pair<int,int>> minHeap; // pair<vertex, weight>
+    auto cmp = [](const pair<int, int>& a, const pair<int, int>& b) {
+        return a.second > b.second;
+    };
+    priority_queue<pair<int,int>, vector<pair<int, int>>, decltype(cmp)> minHeap(cmp); // pair<vertex, weight>
+    
     minHeap.push({source, 0});
-
     while (!minHeap.empty()) {
         int u = minHeap.top().first;
         int dest_u =  minHeap.top().second;
@@ -61,5 +64,5 @@ void print_path(const vector<int>& v, int total) {
         cout << v[i] << " ";
     }
     cout << endl;
-    cout << "Total cost is: " << total << endl;
+    cout << "Total cost is " << total << endl;
 }
