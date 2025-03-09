@@ -45,12 +45,12 @@ vector<int> extract_shortest_path(const vector<int>& previous, int destination) 
         return result;
     }
 
+    result.push_back(destination);
     int before_dest = previous[destination];
     while(before_dest != -1) {
-        result.push_back(before_dest);
+        result.insert(result.begin(), before_dest);
         before_dest = previous[before_dest];
     }
-    result.push_back(destination);
 
     return result;
 }
