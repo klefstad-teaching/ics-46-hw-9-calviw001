@@ -25,6 +25,29 @@ namespace {
   }
 
 
+  TEST(Dijkstra, Dijkstra_Shortest_Path) {
+    Graph G;
+    string filename = "src/small.txt";
+    file_to_graph(filename, G);
+
+    int source = 0; 
+    int dest = 3; 
+
+    vector<int> previous;
+    vector<int> distances = dijkstra_shortest_path(G, source, previous);
+
+    vector<int> expected_distances;
+    expected_distances.push_back(0); // 0 -> 0
+    expected_distances.push_back(3); // 0 -> 1
+    expected_distances.push_back(6); // 0 -> 2
+    expected_distances.push_back(1); // 0 -> 3
+
+    for (size_t i = 0; i < distances.size(); ++i) {
+        EXPECT_TRUE(distances[i] == expected_distances[i]);
+    }
+  }
+
+
   int main(int argc, char **argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
