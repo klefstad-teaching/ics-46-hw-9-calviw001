@@ -58,21 +58,21 @@ bool is_adjacent(const string& word1, const string& word2) {
                 return false;
             }
         }
-        return num_diffs == 1;
+        return num_diffs <= 1;
     }
     else if (length_diff <= 1 && length_diff >= -1) {
         int num_diffs = 0;
         string longer_word;
         string shorter_word;
         if (length_diff == 1) {
-            string longer_word = word1;
-            string shorter_word = word2;
+            longer_word = word1;
+            shorter_word = word2;
         }
         else {
-            string longer_word = word2;
-            string shorter_word = word1;
+            longer_word = word2;
+            shorter_word = word1;
         }
-        for (int i = 0, j = 0; i < shorter_word.size() && j < longer_word.size(); i++, j++) {
+        for (int i = 0, j = 0; i < shorter_word.size(); i++, j++) {
             if (shorter_word[i] != longer_word[j]) {
                 num_diffs += 1;
                 --i;
@@ -81,7 +81,7 @@ bool is_adjacent(const string& word1, const string& word2) {
                 return false;
             }
         }
-        return num_diffs == 1;
+        return num_diffs <= 1;
     }
     else {
         return false;

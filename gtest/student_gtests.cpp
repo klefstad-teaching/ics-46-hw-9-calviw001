@@ -22,6 +22,8 @@ namespace {
     EXPECT_TRUE(is_adjacent("zoom", "zoo"));
     EXPECT_TRUE(is_adjacent("cat", "chat"));
     EXPECT_TRUE(is_adjacent("what", "hat"));
+    EXPECT_TRUE(is_adjacent("apple", "appl"));
+    EXPECT_TRUE(is_adjacent("apple", "bapple"));
     EXPECT_FALSE(is_adjacent("chat", "cheet"));
   }
 
