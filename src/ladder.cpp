@@ -62,6 +62,8 @@ bool is_adjacent(const string& word1, const string& word2) {
     }
     else if (length_diff <= 1 && length_diff >= -1) {
         int num_diffs = 0;
+        string longer_word;
+        string shorter_word;
         if (length_diff = 1) {
             string longer_word = word1;
             string shorter_word = word2;
