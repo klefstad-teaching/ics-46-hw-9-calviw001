@@ -48,7 +48,19 @@ bool is_adjacent(const string& word1, const string& word2) {
         return true;
     }
     int length_diff = word1.size() - word2.size();
-    if (length_diff <= 1 && length_diff >= -1) {
+    if (length_diff == 0) {
+        int num_diffs = 0;
+        for (int i = 0; i < word1.size(); i++) {
+            if (word1[i] != word2[i]) {
+                num_diffs += 1;
+            }
+            if (num_diffs > 1) {
+                return false;
+            }
+        }
+        return num_diffs == 1;
+    }
+    else if (length_diff <= 1 && length_diff >= -1) {
         return edit_distance_within(word1, word2, 1);
     }
     else {
